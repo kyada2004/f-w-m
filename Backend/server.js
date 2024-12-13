@@ -1,11 +1,12 @@
-const express = require('express');
-const connectDB = require('./config/db.js');
-const adminRoutes = require('./Router/adminRoutes.js');  // Correct path
-const donerRoutes = require('./Router/donerRoutes.js');
-const foodRequestRoutes = require('./Router/foodRequestRoutes.js');
-const contactRoutes = require('./Router/contactRoutes.js');
-const adminmessgeRoutes = require('./Router/adminmessgeRoutes.js');
-const bodyParser = require('body-parser');
+const express = require("express");
+const connectDB = require("./config/db.js");
+const adminRoutes = require("./Router/adminRoutes.js"); // Correct path
+const donerRoutes = require("./Router/donerRoutes.js");
+const foodRequestRoutes = require("./Router/foodRequestRoutes.js");
+const contactRoutes = require("./Router/contactRoutes.js");
+const adminmessgeRoutes = require("./Router/adminmessgeRoutes.js");
+const bodyParser = require("body-parser");
+const router = require("./Router/index.js");
 
 const app = express();
 
@@ -17,12 +18,10 @@ app.use(bodyParser.json());
 connectDB();
 
 // Routes
-app.use('/api/admin', adminRoutes);  
-app.use('/api/doner', donerRoutes);
-app.use('/api/donerfood', foodRequestRoutes);
-app.use('/api/contact', contactRoutes);
-app.use('/api/adminmessges', adminmessgeRoutes);
+app.use("/api", router);
 
 // Start Server
 const PORT = 3000;
-app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+app.listen(PORT, () =>
+  console.log(`Server running at http://localhost:${PORT}`)
+);
